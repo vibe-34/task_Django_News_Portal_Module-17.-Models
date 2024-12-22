@@ -16,6 +16,7 @@
         post_1 = Post.objects.create(author=author_1, choice_type='AR', title='Статья #1', content='Содержание статьи #1: Давным-давно ....')
         post_2 = Post.objects.create(author=author_2, choice_type='AR', title='Статья #2', content='Содержание статьи #2: В темном-темном лесу  ....')
         post_3 = Post.objects.create(author=author_1, choice_type='NW', title='Новость #1', content='Содержание новости #1: Сегодня впервые ....')
+        post_4 = Post.objects.create(author=author_2, title='тест добавления', content='Статья добавлена без передачи параметра choice_type => проверка отработки значения по умолчанию')
 
 5. Присвоить им категории (как минимум в одной статье/новости должно быть не меньше 2 категорий).
         post_1.categories.add(category_3, category_4)

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from .resources import POST_TYPE_CHOICES
+
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Связь со встроенной моделью User
@@ -23,16 +25,9 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    ARTICLE = 'AR'
-    NEWS = 'NW'
-
-    POST_TYPE_CHOICES = [
-        (ARTICLE, 'Статья'),
-        (NEWS, 'Новость'),
-    ]
 
     author = models.ForeignKey(Author, on_delete=models.CASCADE)  # 'связь один ко многим' с моделью Author
-    choice_type = models.CharField(max_length=2, choices=POST_TYPE_CHOICES)  # Выбор типа сообщения
+    choice_type = models.CharField(max_length=2, choices=POST_TYPE_CHOICES, default='AR')  # Выбор типа сообщения
     time_in = models.DateTimeField(auto_now_add=True)  # автоматическое добавление даты и времени при создании поста
     categories = models.ManyToManyField(Category, through='PostCategory')  # 'связь многие ко многим' через PostCategory
     title = models.CharField(max_length=128)
